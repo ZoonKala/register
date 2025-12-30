@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register with Phone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="file_00000000a6cc724395ed98c5349e542a__1_-removebg-preview (1).png"
+        type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form" id="registerForm">
+
+            <h2>Register with Phone</h2>
+
+            <div class="input-group phone-group">
+                <span class="country-code">+98</span>
+                <input type="tel" id="phone" maxlength="10" placeholder="9123456789" required>
+                <label>Phone Number</label>
+            </div>
+
+            <button type="button" id="sendCodeBtn">Send Code</button>
+
+            <div class="input-group" id="codeGroup" style="display:none;">
+                <input type="text" id="codeInput" maxlength="6" pattern="\d{6}">
+                <label>Enter 6-digit Code</label>
+            </div>
+
+            <button type="submit" id="registerBtn" style="display:none;">Register</button>
+
+            <div id="smsBox" style="display:none; margin-top:15px; color:#4CAF50; font-size:14px;"></div>
+            <div id="timer" style="margin-top:10px; color:#aaa; font-size:13px;"></div>
+
+        </form>
+    </div>
+
+    <script>
+        let generatedCode = "";
+        let codeExpireTimer;
+        let resendTimer;
+        let canResend = true;
+
+        function generateCode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        document.getElementById("sendCodeBtn").addEventListener("click", () => {
+            if (!canResend) return;
+
+            const phone = document.getElementById("phone").value;
+            if (phone.length !== 10) { alert("شماره تلفن معتبر نیست"); return; }
+
+            generatedCode = generateCode();
+
+            const smsBox = document.getElementById("smsBox");
+            smsBox.style.display = "block";
+            smsBox.innerText = `📩 SMS: Your verification code is ${generatedCode}`;
+
+            document.getElementById("codeGroup").style.display = "block";
+            document.getElementById("registerBtn").style.display = "block";
+
+            clearTimeout(codeExpireTimer);
+            codeExpireTimer = setTimeout(() => {
+                generatedCode = "";
+                smsBox.innerText = "⌛ Code expired. Please request a new one.";
+            }, 15000);
+
+            canResend = false;
+            let timeLeft = 60;
+            const timerEl = document.getElementById("timer");
+            timerEl.innerText = `Resend available in ${timeLeft}s`;
+
+            resendTimer = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = `Resend available in ${timeLeft}s`;
+                if (timeLeft <= 0) { clearInterval(resendTimer); timerEl.innerText = "You can resend the code now."; canResend = true; }
+            }, 1000);
+        });
+
+        document.getElementById("codeInput").addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
+        });
+
+        document.getElementById("registerForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const enteredCode = document.getElementById("codeInput").value;
+
+            if (!generatedCode) { alert("کد منقضی شده است"); return; }
+            if (enteredCode !== generatedCode) { alert("کد وارد شده اشتباه است"); return; }
+
+            // ✅ موفق → هوم
+            window.location.href = "home.html";
+        });
+    </script>
+
+</body>
+
+</html>

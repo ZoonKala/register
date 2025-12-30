@@ -1,0 +1,209 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #1f2421, #262b28, #1f2421, #2a2f2b);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container { animation: fadeIn 1s ease; }
+
+.form {
+  background: #262b28;
+  padding: 35px;
+  width: 420px;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.form h2 {
+  color: #4CAF50;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #444;
+  border-radius: 6px;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: #aaa;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.3s;
+  background: #262b28;
+  padding: 0 5px;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+  top: -8px;
+  font-size: 12px;
+  color: #4CAF50;
+}
+
+/* Phone */
+.phone-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.phone-group .country-code {
+  color: #4CAF50;
+  font-weight: bold;
+  padding: 12px 8px;
+  border: 2px solid #444;
+  border-radius: 6px 0 0 6px;
+  background: #262b28;
+}
+
+.phone-group input {
+  border-radius: 0 6px 6px 0;
+  border: 2px solid #444;
+  border-left: none;
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.phone-group input:focus { border-color: #4CAF50; }
+
+/* Gender radios */
+.radio-group input[type="radio"] {
+  display: none; /* مخفی کردن رادیو واقعی */
+}
+
+.radio-group label {
+  display: inline-flex;
+  align-items: center; /* متن و span وسط چین */
+  gap: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  margin-right: 15px;
+}
+
+.radio-btn {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+/* وقتی انتخاب شد */
+.radio-group input[type="radio"]:checked + .radio-btn {
+  background-color: aqua; /* رنگ پیشفرض، بعدا برای هر گزینه جداگانه میشه */
+  border-color: aqua;
+}
+
+/* رنگ هر گزینه جداگانه */
+.radio-group label:nth-child(1) input:checked + .radio-btn { background-color: aqua; }
+.radio-group label:nth-child(2) input:checked + .radio-btn { background-color: pink; }
+.radio-group label:nth-child(3) input:checked + .radio-btn { background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); border-color: transparent; }
+
+/* رنگ اختصاصی وقتی انتخاب شد */
+.radio-group label:nth-child(2) input:checked + span { background-color: aqua; border-color: aqua; }     /* Male */
+.radio-group label:nth-child(3) input:checked + span { background-color: pink; border-color: pink; }     /* Female */
+.radio-group label:nth-child(4) input:checked + span { background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); border-color: transparent; } /* Other */
+
+/* Agreement checkbox */
+.agreement {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.agreement input { display: none; }
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #4CAF50;
+  border-radius: 4px;
+}
+
+.agreement input:checked + .checkmark {
+  background: #4CAF50;
+}
+
+.agreement a { color: #4CAF50; text-decoration: none; }
+.agreement a:hover { color: #81C784; text-decoration: underline; }
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4CAF50, #66bb6a);
+  border: none;
+  border-radius: 8px;
+  color: #1f2421;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(76,175,80,0.4);
+}
+
+/* Links */
+.links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links a {
+  color: #aaa;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.links a:hover { color: #4CAF50; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

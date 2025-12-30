@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="file_00000000a6cc724395ed98c5349e542a__1_-removebg-preview (1).png"
+        type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form login-form">
+
+            <h2>Login</h2>
+
+            <div class="input-group">
+                <input type="text" required>
+                <label>Username or Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" required>
+                <label>Password</label>
+            </div>
+
+            <div class="input-group phone-group">
+                <span class="country-code">+98</span>
+                <input type="tel" maxlength="10" placeholder="9123456789">
+                <label>Phone (Optional)</label>
+            </div>
+
+            <label class="agreement">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                Remember me
+            </label>
+
+            <button type="submit">Login</button>
+
+            <div class="links">
+                <a href="Fpass.html">Forgot Password?</a>
+                <a href="index.html">Register</a>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.querySelector(".login-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            // ✅ موفق → هوم
+            window.location.href = "home.html";
+        });
+    </script>
+</body>
+
+</html>
